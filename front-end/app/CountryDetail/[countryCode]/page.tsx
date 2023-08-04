@@ -126,7 +126,7 @@ const CountryDetail = ({params: { countryCode },}: {params: { countryCode: strin
 
       {country?.weather.map((weatherObj, index) => (
 
-        <div className="flex mb-2 items-center">
+        <div key={index} className="flex mb-2 items-center">
           <p className="mr-2">{weatherObj.countryname}</p>
           <Image src="https://openweathermap.org/img/wn/10d@2x.png" width={42} height={42} alt="weather"/>
           <p className="text-[14px]"> {weatherObj.min} / {weatherObj.max} °C ({weatherObj.description})</p>
