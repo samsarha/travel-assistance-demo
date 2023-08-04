@@ -10,9 +10,9 @@ const SearchBar = () => {
     setSearchInput(e.target.value);
   };
 
-  const filteredCountries: string[] = countryNames.filter((name) => {
+  const filteredCountries: {name: string, code:string}[] = countryNames.filter((obj) => {
     if (searchInput.length > 0) {
-      return name.toLowerCase().includes(searchInput.toLowerCase());
+      return obj.name.toLowerCase().includes(searchInput.toLowerCase());
     }
   });
 
@@ -36,12 +36,12 @@ const SearchBar = () => {
 
       <div className="block w-full max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
         <ul className="w-full">
-          {filteredCountries.map((country, index) => (
+          {filteredCountries.map((countryObj, index) => (
             <li
               className="w-full border-b-2 border-neutral-100 border-opacity-100 px-4 py-3 dark:border-opacity-50 hover:bg-indigo-100"
               key={index}
             >
-              <Link href={`/CountryDetail/${country}`}>{country}</Link>
+              <Link href={`/CountryDetail/${countryObj.code}`}>{countryObj.name}</Link>
             </li>
           ))}
         </ul>
