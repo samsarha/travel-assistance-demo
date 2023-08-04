@@ -6,9 +6,11 @@ The frontend for this project was built with React/NextJS + Tailwind and for the
 
 The external apis for this projects are:
 
-• openweathermap.org -> To get the weather forecast
-• exchangeratesapi.io -> To get the exchange rate
-• worldbank.org -> To get the population and GDP
+ openweathermap.org -> To get the weather forecast
+ 
+ exchangeratesapi.io -> To get the exchange rate
+ 
+ worldbank.org -> To get the population and GDP
 
 Aditionally Auth0 was used to handle user authentication (https://auth0.com/).
 
