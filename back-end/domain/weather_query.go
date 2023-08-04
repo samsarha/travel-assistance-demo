@@ -7,6 +7,8 @@ import (
 
 func QueryWeatherData(
 	countryCode string,
-	datasource datasource.WeatherDataSource) []models.Weather {
-	return datasource.FetchWeatherData(countryCode)
+	weatherDS datasource.WeatherDataSource,
+	countryDS datasource.CountryDataSource) [5]models.Weather {
+
+	return weatherDS.FetchWeatherData(countryCode, countryDS)
 }

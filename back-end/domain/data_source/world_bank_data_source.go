@@ -35,6 +35,21 @@ func (wb WorldBankDataSource) FetchCountryData(countryCode string) models.Countr
 	return country
 }
 
+func (wb WorldBankDataSource) FetchCountryCoordinates(countryCode string) models.Coordinates {
+
+	coordinates := models.Coordinates{}
+
+	cityResponse := MakeGetRequest("https://api.worldbank.org/v2/country/mz?format=json")
+
+	var cityResponseObj models.CapitalCity
+	json.Unmarshal(cityResponse, &cityResponseObj)
+
+	coordinates.Latitude = cityResponseObj[1][0].Latitude
+	coordinates.Longitude = cityResponseObj[1][0].Longitude
+
+	return coordinates
+}
+
 func MakeGetRequest(endpoint string) []byte {
 
 	response, err := http.Get(endpoint)

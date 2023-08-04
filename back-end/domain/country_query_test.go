@@ -13,9 +13,13 @@ func (ds CountryDataSourceStub) FetchCountryData(countryCode string) models.Coun
 	return ds.country
 }
 
+func (ds CountryDataSourceStub) FetchCountryCoordinates(countryCode string) models.Coordinates {
+	return models.Coordinates{Latitude: "1233", Longitude: "-1233.2"}
+}
+
 func TestQueryCountryData(t *testing.T) {
 
-	weather := []models.Weather{{Date: "123454433443", IconUri: "dshdsdssdf", Min: 25, Max: 12, Description: "Rainy"}}
+	weather := [5]models.Weather{{Date: "123454433443", IconUri: "dshdsdssdf", Min: 25, Max: 12, Description: "Rainy"}}
 	want := models.Country{CountryName: "Zimbabwe", Gdp: 1000, ExchangeRate: 54.30, Weather: weather}
 
 	datasource := CountryDataSourceStub{country: want}
@@ -29,7 +33,7 @@ func TestQueryCountryData(t *testing.T) {
 
 func TestQueryCountryDataWeather(t *testing.T) {
 
-	wthr := []models.Weather{{Date: "123454433443", IconUri: "dshdsdssdf", Min: 25, Max: 12, Description: "Rainy"}}
+	wthr := [5]models.Weather{{Date: "123454433443", IconUri: "dshdsdssdf", Min: 25, Max: 12, Description: "Rainy"}}
 	cntry := models.Country{CountryName: "Zimbabwe", Gdp: 1000, ExchangeRate: 54.30, Weather: wthr}
 
 	datasource := CountryDataSourceStub{country: cntry}
