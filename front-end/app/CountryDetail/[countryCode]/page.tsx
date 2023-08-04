@@ -29,7 +29,7 @@ const CountryDetail = ({params: { countryCode },}: {params: { countryCode: strin
     const fetchCountry = async() => {
   
       try {
-        const response = await fetch("http://localhost:8080/country/mz",{
+        const response = await fetch(`http://localhost:8080/country/${countryCode}`,{
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'

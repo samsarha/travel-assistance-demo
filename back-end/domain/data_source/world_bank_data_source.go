@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
 type WorldBankDataSource struct {
@@ -17,7 +18,11 @@ func (wb WorldBankDataSource) FetchCountryData(countryCode string) models.Countr
 
 	country := models.Country{}
 
-	populationResponse := MakeGetRequest("https://api.worldbank.org/v2/country/moz/indicator/SP.POP.TOTL?date=2022&format=json")
+	populationResponse := MakeGetRequest(
+
+		fmt.Sprintf(
+			"https://api.worldbank.org/v2/country/%s/indicator/SP.POP.TOTL?date=2022&format=json",
+			strings.ToLower(countryCode)))
 
 	var populationResponseObj models.Population
 	json.Unmarshal(populationResponse, &populationResponseObj)
@@ -25,7 +30,11 @@ func (wb WorldBankDataSource) FetchCountryData(countryCode string) models.Countr
 	country.CountryName = populationResponseObj[1][0].Country.Value
 	country.Population = populationResponseObj[1][0].Value
 
-	gdpResponse := MakeGetRequest("https://api.worldbank.org/v2/country/moz/indicator/NY.GDP.MKTP.CD?date=2022&format=json")
+	gdpResponse := MakeGetRequest(
+
+		fmt.Sprintf(
+			"https://api.worldbank.org/v2/country/%s/indicator/NY.GDP.MKTP.CD?date=2022&format=json",
+			strings.ToLower(countryCode)))
 
 	var gdpResponseObj models.Gdp
 	json.Unmarshal(gdpResponse, &gdpResponseObj)
@@ -39,7 +48,11 @@ func (wb WorldBankDataSource) FetchCountryCoordinates(countryCode string) models
 
 	coordinates := models.Coordinates{}
 
-	cityResponse := MakeGetRequest("https://api.worldbank.org/v2/country/mz?format=json")
+	cityResponse := MakeGetRequest(
+
+		fmt.Sprintf(
+			"https://api.worldbank.org/v2/country/%s?format=json",
+			strings.ToLower(countryCode)))
 
 	var cityResponseObj models.CapitalCity
 	json.Unmarshal(cityResponse, &cityResponseObj)
