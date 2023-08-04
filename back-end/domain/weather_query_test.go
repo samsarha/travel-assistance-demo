@@ -27,7 +27,7 @@ func TestQueryWeatherData(t *testing.T) {
 
 	countryDS := CountryDataSourceStub{country: ctry}
 
-	got := QueryWeatherData("MOZ", weatherDS, countryDS)
+	got := QueryWeatherData("MZ", weatherDS, countryDS)
 
 	if len(got) != len(weatherArr) {
 		t.Errorf("got %d, wanted %d", len(got), len(weatherArr))

@@ -38,7 +38,7 @@ func TestQueryCountryDataWeather(t *testing.T) {
 
 	datasource := CountryDataSourceStub{country: cntry}
 
-	got := len(QueryCountryData("MOZ", datasource).Weather)
+	got := len(QueryCountryData("MZ", datasource).Weather)
 
 	if got < 1 {
 		t.Errorf("got %q, wanted at least one weather forecast", got)

@@ -17,6 +17,11 @@ func countryByName(c *gin.Context) {
 	oWeatherDS := datasource.OpenWeatherDataSource{}
 	weather := domain.QueryWeatherData(countryCode, oWeatherDS, wBankDS)
 	country.Weather = weather
+
+	exchangeRateApiDS := datasource.ExchgrteapiDataSource{}
+	exchangeRate := domain.QueryExchangeRateData(countryCode, exchangeRateApiDS)
+	country.ExchangeRate = exchangeRate.Rate
+
 	c.IndentedJSON(http.StatusOK, country)
 
 }
