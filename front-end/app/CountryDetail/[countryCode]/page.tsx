@@ -51,7 +51,7 @@ const CountryDetail = ({params: { countryCode },}: {params: { countryCode: strin
 
     fetchCountry();
 
-  }, []);
+  });
 
 
   
