@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image"
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 
 interface Country {
@@ -22,6 +23,7 @@ interface Weather {
 
 const CountryDetail = ({params: { countryCode },}: {params: { countryCode: string };}) => {
 
+  const { user, error, isLoading } = useUser();
 
   const [country, setCountry] = useState<Country>();
 
@@ -68,20 +70,53 @@ const CountryDetail = ({params: { countryCode },}: {params: { countryCode: strin
 
       <div className="w-1/3 pl-12">
         <h3 className="text-[32px]">Population</h3>
+
+        {
+        user == null ? 
+        <p className="blur-lg">{country?.population}</p>:
         <p>{country?.population}</p>
+        }
+
+        
         </div>
 
         <div className="w-1/3 pl-12">
         <h3 className="text-[32px]">GDP</h3>
-        <p>{country?.gdp} USD</p>
+
+        {
+          user == null ? 
+          <p className="blur-lg">{country?.gdp} USD</p> : 
+          <p>{country?.gdp} USD</p>
+        }        
+        
+
         </div>
 
         <div className="w-1/3 pl-12">
         <h3 className="text-[32px]">Exchange rate</h3>
-        <p>1 Unit / {country?.exchangerate} USD</p>
+
+        {
+          user == null ? 
+          <p className="blur-lg">1 Unit / {country?.exchangerate} USD</p> : 
+          <p>1 Unit / {country?.exchangerate} USD</p>
+        }
+
         </div>
 
       </div>
+
+      <div className="flex item justify-center mt-8">
+
+        {user == null ? 
+          <a href="/api/auth/login" className="px-12 py-4 text-white bg-indigo-600 border-l rounded ml-2">
+            Login to see more
+          </a> :
+        
+          <p/> 
+        }
+      </div>
+    
+      
 
 
     </div> 
